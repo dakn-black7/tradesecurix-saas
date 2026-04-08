@@ -1,33 +1,75 @@
-import Link from 'next/link'
-import { ArrowRight, UserPlus } from 'lucide-react'
-import { siteConfig } from '@/lib/site'
+import Link from "next/link";
 
-export default function Signup() {
+export default function SignupPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 flex items-center justify-center px-4">
-      <div className="w-full max-w-xl">
-        <div className="card text-center">
-          <div className="w-14 h-14 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <UserPlus className="text-blue-500" size={28} />
-          </div>
-          <h1 className="text-3xl font-bold mb-2">Request workspace access</h1>
-          <p className="text-gray-400 mb-6">
-            Tradesecurix workspace access is shared during onboarding and customer setup. Contact us if you want to evaluate the product or request access for your organization.
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link href="/contact" className="btn-primary inline-flex items-center gap-2">
-              Request Access <ArrowRight size={20} />
-            </Link>
-            <Link href="/auth/login" className="btn-secondary inline-flex items-center gap-2">
-              Back to Login
-            </Link>
+    <main className="min-h-screen flex items-center justify-center px-6">
+      <div className="w-full max-w-md">
+        <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8">
+          <h1 className="text-3xl font-bold mb-2">Create account</h1>
+          <p className="text-zinc-400 mb-8">Join TradeSecurix to start verifying trade documents</p>
+
+          <form className="space-y-5">
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-sm font-medium mb-2">First name</label>
+                <input
+                  type="text"
+                  placeholder="John"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-blue-600"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Last name</label>
+                <input
+                  type="text"
+                  placeholder="Doe"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-blue-600"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Company</label>
+              <input
+                type="text"
+                placeholder="Your company"
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Email</label>
+              <input
+                type="email"
+                placeholder="you@company.com"
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Password</label>
+              <input
+                type="password"
+                placeholder="••••••••"
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-blue-600"
+              />
+            </div>
+
+            <button className="w-full py-3 bg-blue-600 hover:bg-blue-500 rounded-xl text-lg font-semibold transition">
+              Create account
+            </button>
+          </form>
+
+          <div className="mt-8 pt-8 border-t border-gray-800 text-center">
+            <p className="text-zinc-400">
+              Already have an account?{" "}
+              <Link href="/auth/login" className="text-blue-400 hover:text-blue-300 font-semibold">
+                Log in
+              </Link>
+            </p>
           </div>
         </div>
-
-        <p className="text-center text-gray-500 text-sm mt-8">
-          Questions about onboarding? Email <a className="text-blue-400 hover:text-blue-300" href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>
-        </p>
       </div>
-    </div>
-  )
+    </main>
+  );
 }
