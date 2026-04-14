@@ -11,16 +11,41 @@ export default function ContactForm() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Replace with actual form submission logic
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to submit request.");
+      }
+
+      setSubmitted(true);
       setFormData({ fullName: "", email: "", userType: "trader", message: "" });
-    }, 3000);
+      setStatus("idle");
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
@@ -122,10 +147,18 @@ export default function ContactForm() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold flex items-center justify-center gap-2 transition transform hover:scale-105"
+                disabled={status === "loading"}
+                className="w-full py-3 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-800 disabled:cursor-not-allowed rounded-lg font-semibold flex items-center justify-center gap-2 transition transform hover:scale-105"
               >
-                Request Demo <ArrowRight className="h-5 w-5" />
+                {status === "loading" ? "Sending..." : "Request Demo"}
+                <ArrowRight className="h-5 w-5" />
               </button>
+
+              {status === "error" && errorMessage ? (
+                <p className="text-sm text-red-400 text-center mt-3">
+                  {errorMessage}
+                </p>
+              ) : null}
 
               {/* Privacy Notice */}
               <p className="text-xs text-zinc-500 text-center">

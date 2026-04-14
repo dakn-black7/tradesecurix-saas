@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Shield, Menu, X } from "lucide-react";
 import { useState } from "react";
 import MobileSidebar from "./MobileSidebar";
+import { Show, SignInButton, UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -38,18 +39,16 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Link 
-              href="#contact" 
-              className="px-5 py-2 text-sm font-medium text-zinc-300 hover:text-white transition"
-            >
-              Demo
-            </Link>
-            <Link 
-              href="#contact" 
-              className="px-6 py-2 text-sm font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition"
-            >
-              Request Demo
-            </Link>
+            <Show when="signed-out">
+              <SignInButton mode="modal">
+                <button className="px-5 py-2 text-sm font-semibold bg-blue-600 text-white rounded-xl shadow-sm hover:bg-blue-500 transition">
+                  Sign In
+                </button>
+              </SignInButton>
+            </Show>
+            <Show when="signed-in">
+              <UserButton afterSignOutUrl="/" />
+            </Show>
           </div>
 
           {/* Mobile Menu Button */}

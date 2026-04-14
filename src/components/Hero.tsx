@@ -1,62 +1,87 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="min-h-[90vh] flex items-center pt-20 px-6">
-      <div className="max-w-5xl mx-auto w-full">
-        {/* Trust Badge */}
-        <div className="flex items-center justify-center mb-8">
-          <div className="inline-flex items-center gap-2 bg-gray-900/50 border border-gray-800 rounded-full px-4 py-2 text-xs font-medium text-zinc-300 backdrop-blur-sm">
-            <CheckCircle2 className="h-4 w-4 text-green-500" />
-            Trusted by institutional traders worldwide
+    <section className="bg-slate-950 py-24 px-6 sm:py-28">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-14 lg:grid-cols-[1.2fr_0.8fr] items-center">
+          <div className="space-y-8 lg:pr-10">
+            <div className="inline-flex rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-blue-300">
+              Built for traders, analysts, and compliance professionals
+            </div>
+
+            <div className="space-y-6">
+              <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                Verify Companies. Analyze Risk. Trade with Confidence.
+              </h1>
+              <p className="max-w-2xl text-lg leading-8 text-zinc-400 sm:text-xl">
+                TradeSecurix helps traders and analysts verify counterparties and analyze documents through structured risk reports — before making financial decisions.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <Link
+                href="#report-proof"
+                className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-4 text-sm font-semibold text-white transition hover:bg-blue-500"
+              >
+                View Sample Report
+              </Link>
+              <Link
+                href="#contact"
+                className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-6 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                Request Demo
+              </Link>
+            </div>
           </div>
-        </div>
 
-        {/* Main Headline */}
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 text-center leading-tight">
-          <span className="text-white">Trade Intelligence,</span>
-          <br />
-          <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-            Not Guesswork
-          </span>
-        </h1>
-
-        {/* Subheading */}
-        <p className="text-lg sm:text-xl text-zinc-400 text-center mb-10 max-w-3xl mx-auto leading-relaxed">
-          Real-time document verification and counterparty risk assessment for cross-border traders. 
-          Machine-learned patterns. Human-verified accuracy. Institutional-grade intelligence.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <Link 
-            href="#contact" 
-            className="px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold flex items-center gap-3 transition transform hover:scale-105 w-full sm:w-auto justify-center"
-          >
-            Request Demo <ArrowRight className="h-5 w-5" />
-          </Link>
-          <Link 
-            href="#pricing" 
-            className="px-8 py-4 border border-gray-700 hover:bg-gray-900 rounded-lg font-semibold transition w-full sm:w-auto text-center"
-          >
-            View Pricing
-          </Link>
-        </div>
-
-        {/* Features List */}
-        <div className="grid sm:grid-cols-3 gap-6 text-sm text-zinc-400 text-center max-w-3xl mx-auto">
-          <div>
-            <p className="font-semibold text-white mb-1">195+ Countries</p>
-            <p>Global verification coverage</p>
-          </div>
-          <div>
-            <p className="font-semibold text-white mb-1">2-Minute Analysis</p>
-            <p>Real-time document processing</p>
-          </div>
-          <div>
-            <p className="font-semibold text-white mb-1">SOC 2 Compliant</p>
-            <p>Enterprise-grade security</p>
+          <div className="relative">
+            <div className="absolute inset-0 -translate-x-4 -translate-y-4 rounded-[2rem] bg-gradient-to-br from-blue-600/10 via-slate-900/0 to-transparent blur-3xl" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+              <div className="bg-slate-900/90 px-6 py-5">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.3em] text-zinc-500">Sample dashboard</p>
+                    <p className="mt-1 text-sm font-semibold text-white">Document risk overview</p>
+                  </div>
+                  <div className="rounded-2xl bg-slate-800 px-3 py-1 text-xs uppercase tracking-[0.3em] text-zinc-300">
+                    Preview
+                  </div>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="rounded-3xl border border-white/10 bg-slate-900 p-5">
+                    <p className="text-sm uppercase tracking-[0.25em] text-zinc-500">Company</p>
+                    <p className="mt-3 text-xl font-semibold text-white">Everbridge Logistics</p>
+                  </div>
+                  <div className="rounded-3xl border border-white/10 bg-slate-900 p-5">
+                    <p className="text-sm uppercase tracking-[0.25em] text-zinc-500">Score</p>
+                    <p className="mt-3 text-xl font-semibold text-white">71</p>
+                  </div>
+                </div>
+                <div className="mt-6 rounded-3xl border border-white/10 bg-slate-900 p-5">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-sm uppercase tracking-[0.25em] text-zinc-500">Status</p>
+                      <p className="mt-2 text-lg font-semibold text-white">Review needed</p>
+                    </div>
+                    <span className="rounded-full bg-amber-500/10 px-3 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-amber-200">
+                      Risk signal
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-6 space-y-3 rounded-3xl border border-white/10 bg-slate-900 p-5 text-sm text-zinc-400">
+                  <p className="font-semibold text-white">Snapshot</p>
+                  <ul className="space-y-2">
+                    <li>• Counterparty verification</li>
+                    <li>• Document integrity checks</li>
+                    <li>• Structured risk guidance</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

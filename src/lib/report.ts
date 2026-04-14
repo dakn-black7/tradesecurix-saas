@@ -24,6 +24,8 @@ export const generateReportPDF = async (data: ReportData): Promise<Blob> => {
   return new Blob(["PDF Report"], { type: "application/pdf" });
 };
 
+export const generateReport = async (data: ReportData): Promise<Blob> => generateReportPDF(data);
+
 export const formatRiskScore = (score: number): string => {
   if (score < 25) return "Low Risk";
   if (score < 50) return "Medium Risk";

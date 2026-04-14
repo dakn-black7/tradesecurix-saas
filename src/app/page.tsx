@@ -1,4 +1,6 @@
 import Hero from "@/components/Hero";
+import ReportProof from "@/components/ReportProof";
+import TrustBlock from "@/components/TrustBlock";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import Pricing from "@/components/Pricing";
@@ -11,6 +13,8 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-950">
       <Hero />
+      <ReportProof />
+      <TrustBlock />
       <Features />
       <HowItWorks />
       <Pricing />
