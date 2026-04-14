@@ -18,6 +18,7 @@ export default function UploadPage() {
     try {
       const response = await fetch("/api/analyze", {
         method: "POST",
+        cache: "no-store",
         body: formData,
       });
       const data = await response.json();
