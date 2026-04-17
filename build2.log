@@ -1,0 +1,26 @@
+
+> tradesecurix-saas@1.0.0 build
+> next build
+
+   ▲ Next.js 15.5.15
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 2.9min
+   Linting and checking validity of types ...
+Failed to compile.
+
+./src/app/dashboard/reports/[id]/page.tsx:74:7
+Type error: Type '{ type: string; message: string; severity: string; }[]' is not assignable to type '{ type: "success" | "warning" | "info"; message: string; severity: "medium" | "low" | "high"; }[]'.
+  Type '{ type: string; message: string; severity: string; }' is not assignable to type '{ type: "success" | "warning" | "info"; message: string; severity: "medium" | "low" | "high"; }'.
+    Types of property 'type' are incompatible.
+      Type 'string' is not assignable to type '"success" | "warning" | "info"'.
+
+[0m [90m 72 |[39m       fileName[33m:[39m [32m`${report.companyName} Report`[39m[33m,[39m
+ [90m 73 |[39m       riskScore[33m:[39m report[33m.[39mriskScore[33m,[39m
+[31m[1m>[22m[39m[90m 74 |[39m       findings[33m:[39m normalizedFindings[33m,[39m
+ [90m    |[39m       [31m[1m^[22m[39m
+ [90m 75 |[39m       timestamp[33m:[39m report[33m.[39mdate[33m,[39m
+ [90m 76 |[39m     })[33m;[39m
+ [90m 77 |[39m   }[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null

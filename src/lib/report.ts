@@ -1,11 +1,9 @@
+import { FindingInput, normalizeFindings } from "./findings";
+
 export interface ReportData {
   fileName: string;
   riskScore: number;
-  findings: {
-    type: "warning" | "info" | "success";
-    message: string;
-    severity: "high" | "medium" | "low";
-  }[];
+  findings: FindingInput[];
   timestamp: string;
 }
 
@@ -19,9 +17,20 @@ export interface CompanyVerification {
 }
 
 export const generateReportPDF = async (data: ReportData): Promise<Blob> => {
+  const normalizedFindings = normalizeFindings(data.findings);
+
   // This would integrate with a PDF generation library like jsPDF or pdfkit
   // For now, returning a placeholder
-  return new Blob(["PDF Report"], { type: "application/pdf" });
+  const content = `
+    Report: ${data.fileName}
+    Risk Score: ${data.riskScore}
+    Timestamp: ${data.timestamp}
+
+    Findings:
+    ${normalizedFindings.map(f => `- ${f.type.toUpperCase()}: ${f.message} (Severity: ${f.severity})`).join('\n')}
+  `;
+
+  return new Blob([content], { type: "application/pdf" });
 };
 
 export const generateReport = async (data: ReportData): Promise<Blob> => generateReportPDF(data);

@@ -53,9 +53,10 @@ export default function ReportPage() {
 
   const handleDownload = () => {
     generateReport({
-      companyName: report.companyName,
+      fileName: `${report.companyName} Report`,
       riskScore: report.riskScore,
-      findings: report.findings
+      findings: report.findings,
+      timestamp: report.date,
     });
   };
 

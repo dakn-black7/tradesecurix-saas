@@ -1,5 +1,6 @@
 ﻿"use client";
 import { AlertTriangle, CheckCircle2, Info } from "lucide-react";
+import { FindingInput, normalizeFindings } from "@/lib/findings";
 
 interface Finding {
   type: "warning" | "info" | "success";
@@ -7,7 +8,8 @@ interface Finding {
   severity: "high" | "medium" | "low";
 }
 
-export default function FindingsPanel({ findings }: { findings: Finding[] }) {
+export default function FindingsPanel({ findings }: { findings: FindingInput[] }) {
+  const normalizedFindings = normalizeFindings(findings);
   return (
     <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
       <h2 className="text-2xl font-bold mb-6">Key Findings</h2>
