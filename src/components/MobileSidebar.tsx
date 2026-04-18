@@ -78,7 +78,7 @@ export default function MobileSidebar({ onClose }: MobileSidebarProps) {
 
           <Show when="signed-in">
             <div className="rounded-2xl border border-gray-800 bg-gray-950 p-3">
-              <UserButton afterSignOutUrl="/" />
+              <UserButton />
             </div>
           </Show>
 

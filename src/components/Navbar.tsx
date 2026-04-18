@@ -47,7 +47,7 @@ export default function Navbar() {
               </SignInButton>
             </Show>
             <Show when="signed-in">
-              <UserButton afterSignOutUrl="/" />
+              <UserButton />
             </Show>
           </div>
 
