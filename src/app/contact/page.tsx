@@ -164,8 +164,8 @@ export default function ContactPage() {
                   <p className="text-sm text-red-400 text-center">{errorMessage}</p>
                 )}
                 <p className="text-xs text-zinc-500 text-center">
-                  We respect your privacy. View our{" "}
-                  <a href="#" className="text-blue-400 hover:text-blue-300">privacy policy</a>.
+                  We respect your privacy.{" "}
+                  <a href="mailto:privacy@tradesecurix.com" className="text-blue-400 hover:text-blue-300">Contact us for privacy inquiries</a>.
                 </p>
               </form>
             )}

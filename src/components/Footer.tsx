@@ -51,9 +51,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
-                  API Docs
-                </a>
+                <span className="text-zinc-500 cursor-default">
+                  API Docs <span className="text-xs">(coming soon)</span>
+                </span>
               </li>
             </ul>
           </div>
@@ -80,22 +80,20 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-3 text-sm text-zinc-400">
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="mailto:legal@tradesecurix.com" className="hover:text-white transition">
                   Terms of Service
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="mailto:privacy@tradesecurix.com" className="hover:text-white transition">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
-                  Risk Disclaimer
-                </a>
+                <span className="text-zinc-500 cursor-default">Risk Disclaimer ↓</span>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
+                <a href="mailto:legal@tradesecurix.com" className="hover:text-white transition">
                   Compliance
                 </a>
               </li>
@@ -115,9 +113,9 @@ export default function Footer() {
                 </a>
               </p>
               <p>
-                <a href="#" className="hover:text-white transition">
+                <Link href="/contact" className="hover:text-white transition">
                   Request Demo
-                </a>
+                </Link>
               </p>
             </div>
 
@@ -173,13 +171,8 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-          <p>&copy; 2026 Trade Securix LLC. All rights reserved.</p>
-          <p>
-            Designed for institutional-grade trade verification.{" "}
-            <a href="#" className="text-blue-400 hover:text-blue-300">
-              Status
-            </a>
-          </p>
+          <p>&copy; 2026 TradeSecurix LLC. All rights reserved.</p>
+          <p>Designed for institutional-grade trade verification.</p>
         </div>
       </div>
     </footer>

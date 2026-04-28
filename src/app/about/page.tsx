@@ -84,7 +84,7 @@ export default function AboutPage() {
             <Users className="h-4 w-4" />
             Company Information
           </div>
-          <h2 className="text-3xl font-bold text-white">Trade Securix LLC (in formation)</h2>
+          <h2 className="text-3xl font-bold text-white">TradeSecurix LLC (in formation)</h2>
           <p className="text-zinc-400 leading-relaxed">
             Headquartered at Randall Ave Ste 100, Cheyenne, WY 82001, USA. We are an early-stage
             company building institutional-grade compliance tooling for cross-border trade. Our
