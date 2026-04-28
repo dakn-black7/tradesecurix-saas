@@ -59,14 +59,30 @@ export default function ReportPage() {
     conclusion: "Based on comprehensive analysis, this trade document appears legitimate with low risk of fraud. The minor inconsistencies detected do not impact the document's validity or the company's credibility."
   };
 
+  const normalizeFindingType = (type: string): "info" | "warning" | "success" => {
+    switch (type) {
+      case "warning": return "warning";
+      case "success": return "success";
+      default: return "info";
+    }
+  };
+
+  const normalizeFindingSeverity = (severity: string): "low" | "medium" | "high" => {
+    switch (severity) {
+      case "high": return "high";
+      case "low": return "low";
+      default: return "medium";
+    }
+  };
+
   const handleDownload = () => {
     generateReport({
       fileName: `${report.companyName} Report`,
       riskScore: report.riskScore,
       findings: report.findings.map((f) => ({
         message: f.title,
-        type: (f.type === "warning" ? "warning" : f.type === "success" ? "success" : "info") as "info" | "warning" | "success",
-        severity: (f.severity === "high" ? "high" : f.severity === "low" ? "low" : "medium") as "low" | "medium" | "high",
+        type: normalizeFindingType(f.type),
+        severity: normalizeFindingSeverity(f.severity),
       })),
       timestamp: report.date,
     });
