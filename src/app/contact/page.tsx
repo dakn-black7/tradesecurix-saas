@@ -87,7 +87,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm text-zinc-500 font-medium uppercase tracking-wider">Address</p>
-                  <p className="text-white font-medium">Trade Securix LLC (in formation)</p>
+                  <p className="text-white font-medium">TradeSecurix LLC (in formation)</p>
                   <p className="text-zinc-400 text-sm">Randall Ave Ste 100</p>
                   <p className="text-zinc-400 text-sm">Cheyenne, WY 82001, USA</p>
                 </div>
