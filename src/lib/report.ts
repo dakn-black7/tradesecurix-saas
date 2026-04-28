@@ -43,8 +43,8 @@ export const formatRiskScore = (score: number): string => {
 };
 
 export const getRiskColor = (score: number): string => {
-  if (score < 25) return "green";
-  if (score < 50) return "yellow";
-  if (score < 75) return "orange";
-  return "red";
+  if (score < 25) return "bg-emerald-500/10 text-emerald-300";
+  if (score < 50) return "bg-yellow-500/10 text-yellow-300";
+  if (score < 75) return "bg-orange-500/10 text-orange-300";
+  return "bg-red-500/10 text-red-300";
 };

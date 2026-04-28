@@ -4,6 +4,14 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { generateReport } from "@/lib/report";
 
+interface ReportFinding {
+  type: string;
+  severity: string;
+  title: string;
+  description: string;
+  recommendation: string;
+}
+
 export default function ReportPage() {
   const params = useParams();
   const reportId = params.id;
@@ -34,28 +42,48 @@ export default function ReportPage() {
     },
     findings: [
       {
-        type: "Document Analysis",
-        severity: "Low",
+        type: "info",
+        severity: "low",
         title: "Minor formatting inconsistency",
         description: "The document header formatting slightly deviates from standard templates, but does not indicate fraud.",
         recommendation: "No action required"
       },
       {
-        type: "Company Verification",
-        severity: "Info",
+        type: "success",
+        severity: "low",
         title: "Company registration confirmed",
         description: "Company registration details match official records.",
         recommendation: "Proceed with confidence"
       }
-    ],
+    ] as ReportFinding[],
     conclusion: "Based on comprehensive analysis, this trade document appears legitimate with low risk of fraud. The minor inconsistencies detected do not impact the document's validity or the company's credibility."
+  };
+
+  const normalizeFindingType = (type: string): "info" | "warning" | "success" => {
+    switch (type) {
+      case "warning": return "warning";
+      case "success": return "success";
+      default: return "info";
+    }
+  };
+
+  const normalizeFindingSeverity = (severity: string): "low" | "medium" | "high" => {
+    switch (severity) {
+      case "high": return "high";
+      case "low": return "low";
+      default: return "medium";
+    }
   };
 
   const handleDownload = () => {
     generateReport({
       fileName: `${report.companyName} Report`,
       riskScore: report.riskScore,
-      findings: report.findings,
+      findings: report.findings.map((f) => ({
+        message: f.title,
+        type: normalizeFindingType(f.type),
+        severity: normalizeFindingSeverity(f.severity),
+      })),
       timestamp: report.date,
     });
   };
@@ -70,10 +98,10 @@ export default function ReportPage() {
   };
 
   const getSeverityIcon = (severity: string) => {
-    switch (severity) {
-      case "Low": return <CheckCircle className="h-5 w-5 text-green-400" />;
-      case "Medium": return <AlertTriangle className="h-5 w-5 text-yellow-400" />;
-      case "High": return <XCircle className="h-5 w-5 text-red-400" />;
+    switch (severity.toLowerCase()) {
+      case "low": return <CheckCircle className="h-5 w-5 text-green-400" />;
+      case "medium": return <AlertTriangle className="h-5 w-5 text-yellow-400" />;
+      case "high": return <XCircle className="h-5 w-5 text-red-400" />;
       default: return <Shield className="h-5 w-5 text-blue-400" />;
     }
   };
@@ -197,8 +225,8 @@ export default function ReportPage() {
                     <div className="flex items-center gap-3 mb-2">
                       <h3 className="font-semibold">{finding.title}</h3>
                       <span className={`px-2 py-1 rounded text-xs font-medium ${
-                        finding.severity === 'Low' ? 'bg-green-600/20 text-green-400' :
-                        finding.severity === 'Medium' ? 'bg-yellow-600/20 text-yellow-400' :
+                        finding.severity.toLowerCase() === 'low' ? 'bg-green-600/20 text-green-400' :
+                        finding.severity.toLowerCase() === 'medium' ? 'bg-yellow-600/20 text-yellow-400' :
                         'bg-red-600/20 text-red-400'
                       }`}>
                         {finding.severity} Risk
