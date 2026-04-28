@@ -23,22 +23,28 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+            <Link href="/solutions" className="text-zinc-300 hover:text-white transition">
+              Solutions
+            </Link>
             <Link href="#features" className="text-zinc-300 hover:text-white transition">
               Features
-            </Link>
-            <Link href="#how-it-works" className="text-zinc-300 hover:text-white transition">
-              How It Works
             </Link>
             <Link href="#pricing" className="text-zinc-300 hover:text-white transition">
               Pricing
             </Link>
-            <Link href="#security" className="text-zinc-300 hover:text-white transition">
-              Security
+            <Link href="/about" className="text-zinc-300 hover:text-white transition">
+              About
             </Link>
           </div>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
+            <Link
+              href="/contact"
+              className="px-4 py-2 text-sm font-semibold text-zinc-300 hover:text-white transition"
+            >
+              Contact
+            </Link>
             <Show when="signed-out">
               <SignInButton mode="modal">
                 <button className="px-5 py-2 text-sm font-semibold bg-blue-600 text-white rounded-xl shadow-sm hover:bg-blue-500 transition">
@@ -47,6 +53,12 @@ export default function Navbar() {
               </SignInButton>
             </Show>
             <Show when="signed-in">
+              <Link
+                href="/dashboard"
+                className="px-5 py-2 text-sm font-semibold bg-blue-600 text-white rounded-xl shadow-sm hover:bg-blue-500 transition"
+              >
+                Dashboard
+              </Link>
               <UserButton />
             </Show>
           </div>

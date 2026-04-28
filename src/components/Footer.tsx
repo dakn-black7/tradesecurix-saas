@@ -31,6 +31,11 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Product</h4>
             <ul className="space-y-3 text-sm text-zinc-400">
               <li>
+                <Link href="/solutions" className="hover:text-white transition">
+                  Solutions
+                </Link>
+              </li>
+              <li>
                 <Link href="#features" className="hover:text-white transition">
                   Features
                 </Link>
@@ -49,6 +54,23 @@ export default function Footer() {
                 <a href="#" className="hover:text-white transition">
                   API Docs
                 </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company Links */}
+          <div>
+            <h4 className="font-semibold mb-4">Company</h4>
+            <ul className="space-y-3 text-sm text-zinc-400">
+              <li>
+                <Link href="/about" className="hover:text-white transition">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-white transition">
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>

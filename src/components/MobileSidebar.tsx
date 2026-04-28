@@ -28,18 +28,18 @@ export default function MobileSidebar({ onClose }: MobileSidebarProps) {
 
         <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4">
           <Link
+            href="/solutions"
+            onClick={onClose}
+            className="block text-lg font-medium text-zinc-300 hover:text-white transition"
+          >
+            Solutions
+          </Link>
+          <Link
             href="#features"
             onClick={onClose}
             className="block text-lg font-medium text-zinc-300 hover:text-white transition"
           >
             Features
-          </Link>
-          <Link
-            href="#how-it-works"
-            onClick={onClose}
-            className="block text-lg font-medium text-zinc-300 hover:text-white transition"
-          >
-            How It Works
           </Link>
           <Link
             href="#pricing"
@@ -49,14 +49,14 @@ export default function MobileSidebar({ onClose }: MobileSidebarProps) {
             Pricing
           </Link>
           <Link
-            href="#security"
+            href="/about"
             onClick={onClose}
             className="block text-lg font-medium text-zinc-300 hover:text-white transition"
           >
-            Security & Compliance
+            About
           </Link>
           <Link
-            href="#contact"
+            href="/contact"
             onClick={onClose}
             className="block text-lg font-medium text-zinc-300 hover:text-white transition"
           >
@@ -77,13 +77,16 @@ export default function MobileSidebar({ onClose }: MobileSidebarProps) {
           </Show>
 
           <Show when="signed-in">
-            <div className="rounded-2xl border border-gray-800 bg-gray-950 p-3">
+            <div className="flex items-center gap-3 rounded-2xl border border-gray-800 bg-gray-950 p-3">
               <UserButton />
+              <Link href="/dashboard" onClick={onClose} className="text-sm font-semibold text-white">
+                Dashboard
+              </Link>
             </div>
           </Show>
 
           <Link
-            href="#contact"
+            href="/contact"
             onClick={onClose}
             className="block w-full py-3 text-center bg-blue-600 hover:bg-blue-500 font-semibold rounded-lg transition text-white"
           >
