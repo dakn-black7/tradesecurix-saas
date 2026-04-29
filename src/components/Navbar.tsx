@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Shield, Menu, X } from "lucide-react";
 import { useState } from "react";
 import MobileSidebar from "./MobileSidebar";
-import { Show, SignInButton, UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,7 +28,7 @@ export default function Navbar() {
             <Link href="#how-it-works" className="text-zinc-300 hover:text-white transition">
               How It Works
             </Link>
-            <Link href="#pricing" className="text-zinc-300 hover:text-white transition">
+            <Link href="/pricing" className="text-zinc-300 hover:text-white transition">
               Pricing
             </Link>
             <Link href="#security" className="text-zinc-300 hover:text-white transition">
@@ -39,16 +38,18 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Show when="signed-out">
-              <SignInButton mode="modal">
-                <button className="px-5 py-2 text-sm font-semibold bg-blue-600 text-white rounded-xl shadow-sm hover:bg-blue-500 transition">
-                  Sign In
-                </button>
-              </SignInButton>
-            </Show>
-            <Show when="signed-in">
-              <UserButton />
-            </Show>
+            <Link
+              href="/dashboard"
+              className="px-4 py-2 text-sm font-semibold text-zinc-300 hover:text-white transition"
+            >
+              Sign In
+            </Link>
+            <Link
+              href="/pricing"
+              className="px-5 py-2 text-sm font-semibold bg-blue-600 text-white rounded-xl shadow-sm hover:bg-blue-500 transition"
+            >
+              Start Free Trial
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -72,4 +73,3 @@ export default function Navbar() {
     </>
   );
 }
-
