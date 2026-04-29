@@ -23,28 +23,39 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <Link href="#features" className="text-zinc-300 hover:text-white transition">
+            <Link href="/#features" className="text-zinc-300 hover:text-white transition">
               Features
             </Link>
-            <Link href="#how-it-works" className="text-zinc-300 hover:text-white transition">
+            <Link href="/#how-it-works" className="text-zinc-300 hover:text-white transition">
               How It Works
             </Link>
-            <Link href="#pricing" className="text-zinc-300 hover:text-white transition">
+            <Link href="/pricing" className="text-zinc-300 hover:text-white transition">
               Pricing
             </Link>
-            <Link href="#security" className="text-zinc-300 hover:text-white transition">
+            <Link href="/#security" className="text-zinc-300 hover:text-white transition">
               Security
             </Link>
+            <Show when="signed-in">
+              <Link href="/dashboard" className="text-zinc-300 hover:text-white transition">
+                Dashboard
+              </Link>
+            </Show>
           </div>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <Show when="signed-out">
               <SignInButton mode="modal">
-                <button className="px-5 py-2 text-sm font-semibold bg-blue-600 text-white rounded-xl shadow-sm hover:bg-blue-500 transition">
+                <button className="px-4 py-2 text-sm font-semibold text-zinc-300 hover:text-white transition">
                   Sign In
                 </button>
               </SignInButton>
+              <Link
+                href="/sign-up"
+                className="px-5 py-2 text-sm font-semibold bg-blue-600 text-white rounded-xl shadow-sm hover:bg-blue-500 transition"
+              >
+                Start Free Trial
+              </Link>
             </Show>
             <Show when="signed-in">
               <UserButton />
@@ -55,6 +66,7 @@ export default function Navbar() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 hover:bg-gray-800 rounded-lg transition"
+            aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
               <X className="h-6 w-6" />

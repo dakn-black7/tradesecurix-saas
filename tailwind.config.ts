@@ -10,10 +10,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0a0a0a",
-        card: "#171717",
-        border: "#27272a",
-        primary: "#2563eb",
+        bg: "#030712",       // gray-950
+        card: "#111827",     // gray-900
+        border: "#1f2937",   // gray-800
+        primary: "#2563eb",  // blue-600
+      },
+      fontFamily: {
+        sans: [
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          '"Helvetica Neue"',
+          "Arial",
+          '"Noto Sans"',
+          "sans-serif",
+        ],
       },
     },
   },
