@@ -97,6 +97,7 @@ function PlanCard({
   description,
   features,
   featured,
+  priceId,
 }: {
   name: string;
   price: string;
@@ -105,6 +106,10 @@ function PlanCard({
   featured?: boolean;
   priceId: string;
 }) {
+  const href = priceId && priceId !== "#"
+    ? `/api/checkout?priceId=${priceId}`
+    : "/sign-up";
+
   return (
     <div
       className={`relative rounded-2xl p-8 border transition ${
@@ -125,7 +130,7 @@ function PlanCard({
         <span className="text-zinc-400 text-sm">/month</span>
       </div>
       <Link
-        href="/sign-up"
+        href={href}
         className={`block w-full py-3 rounded-xl font-semibold text-center mb-6 transition text-sm ${
           featured
             ? "bg-blue-600 hover:bg-blue-500 text-white"
