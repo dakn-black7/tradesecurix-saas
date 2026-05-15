@@ -14,7 +14,7 @@ export default function FindingsPanel({ findings }: { findings: FindingInput[] }
     <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
       <h2 className="text-2xl font-bold mb-6">Key Findings</h2>
       <div className="space-y-4">
-        {findings.map((finding, index) => {
+        {normalizedFindings.map((finding, index) => {
           const iconColor = {
             high: "text-red-400",
             medium: "text-yellow-400",
