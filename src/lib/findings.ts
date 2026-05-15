@@ -1,51 +1,65 @@
-export type FindingInput =
-  | string
-  | {
-      text?: string;
-      message?: string;
-      title?: string;
-      description?: string;
-      recommendation?: string;
-      severity?: string;
-      type?: string;
-    };
+﻿export type FindingSeverity = 'high' | 'medium' | 'low';
 
 export type NormalizedFinding = {
+  severity: FindingSeverity;
   message: string;
-  severity: "low" | "medium" | "high";
-  type: "info" | "warning" | "success";
 };
 
-export function normalizeFinding(input: FindingInput): NormalizedFinding {
-  if (typeof input === "string") {
-    return {
-      message: input,
-      severity: "medium",
-      type: "info",
-    };
-  }
+export type FindingInput = {
+  severity?: unknown;
+  message?: unknown;
+  text?: unknown;
+  title?: unknown;
+  description?: unknown;
+  recommendation?: unknown;
+  type?: unknown;
+} | null | undefined;
 
-  const { text, message, title, description, recommendation, severity, type } = input;
+type SafeFinding = {
+  severity?: unknown;
+  message?: unknown;
+  text?: unknown;
+  title?: unknown;
+  description?: unknown;
+  recommendation?: unknown;
+};
 
-  const combinedMessage = message || text || `${title || "Finding"}: ${description || "No description"}`;
+const DEFAULT_MESSAGE = 'Potential issue identified during analysis.';
 
-  const normalizedSeverity: "low" | "medium" | "high" =
-    severity === "high" || severity === "High" ? "high" :
-    severity === "low" || severity === "Low" ? "low" :
-    "medium";
-
-  const normalizedType: "info" | "warning" | "success" =
-    type === "warning" || type === "Warning" ? "warning" :
-    type === "success" || type === "Success" ? "success" :
-    "info";
-
-  return {
-    message: combinedMessage,
-    severity: normalizedSeverity,
-    type: normalizedType,
-  };
+function toSafeString(value: unknown): string {
+  if (typeof value !== 'string') return '';
+  return value.trim();
 }
 
-export function normalizeFindings(inputs: FindingInput[]): NormalizedFinding[] {
-  return inputs.map(normalizeFinding);
+function normalizeSeverity(value: unknown): FindingSeverity {
+  const normalized = typeof value === 'string' ? value.trim().toLowerCase() : '';
+  if (normalized === 'high' || normalized === 'medium' || normalized === 'low') {
+    return normalized;
+  }
+  return 'medium';
+}
+
+export function normalizeFindings(findings: FindingInput[] | null | undefined): NormalizedFinding[] {
+  if (!Array.isArray(findings) || findings.length === 0) {
+    return [{ severity: 'medium', message: DEFAULT_MESSAGE }];
+  }
+
+  const normalizedFindings = findings.map((entry): NormalizedFinding => {
+    const finding = (entry && typeof entry === 'object' ? entry : {}) as SafeFinding;
+
+    const richMessage = [finding.title, finding.description, finding.recommendation]
+      .map(toSafeString)
+      .filter(Boolean)
+      .join(' — ');
+
+    const message = finding.message ?? finding.text ?? (richMessage || DEFAULT_MESSAGE);
+    const normalizedMessage = toSafeString(message) || DEFAULT_MESSAGE;
+
+    return {
+      severity: normalizeSeverity(finding.severity),
+      message: normalizedMessage,
+    };
+  });
+
+  return normalizedFindings;
 }

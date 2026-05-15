@@ -3,5 +3,7 @@
 @tailwind utilities;
 
 body {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   @apply bg-gray-950 text-zinc-100;
 }
