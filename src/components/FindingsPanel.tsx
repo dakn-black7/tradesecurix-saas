@@ -1,48 +1,41 @@
 ﻿"use client";
-import { AlertTriangle, CheckCircle2, Info } from "lucide-react";
-import { FindingInput, normalizeFindings } from "@/lib/findings";
+import { AlertTriangle, CheckCircle2, Info } from 'lucide-react';
+import type { FindingInput, FindingSeverity } from '@/lib/findings';
+import { normalizeFindings } from '@/lib/findings';
 
-interface Finding {
-  type: "warning" | "info" | "success";
-  message: string;
-  severity: "high" | "medium" | "low";
-}
+const containerColor: Record<FindingSeverity, string> = {
+  high: 'border-red-900/60 bg-red-950/30',
+  medium: 'border-blue-900/60 bg-blue-950/20',
+  low: 'border-emerald-900/60 bg-emerald-950/20',
+};
+
+const iconColor: Record<FindingSeverity, string> = {
+  high: 'text-red-400',
+  medium: 'text-blue-400',
+  low: 'text-emerald-400',
+};
 
 export default function FindingsPanel({ findings }: { findings: FindingInput[] }) {
   const normalizedFindings = normalizeFindings(findings);
+
   return (
-    <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-      <h2 className="text-2xl font-bold mb-6">Key Findings</h2>
-      <div className="space-y-4">
+    <div className="card p-6">
+      <h3 className="mb-4 text-lg font-semibold">Key Findings</h3>
+      <ul className="space-y-2 text-sm text-gray-300">
         {normalizedFindings.map((finding, index) => {
-          const iconColor = {
-            high: "text-red-400",
-            medium: "text-yellow-400",
-            low: "text-green-400",
-          };
-          const bgColor = {
-            high: "bg-red-600/10 border-red-600/30",
-            medium: "bg-yellow-600/10 border-yellow-600/30",
-            low: "bg-green-600/10 border-green-600/30",
-          };
+          const Icon = finding.severity === 'high' ? AlertTriangle : finding.severity === 'low' ? CheckCircle2 : Info;
 
           return (
-            <div key={index} className={`border rounded-xl p-4 flex items-start gap-3 ${bgColor[finding.severity]}`}>
-              {finding.severity === "high" ? (
-                <AlertTriangle className={`h-5 w-5 mt-0.5 flex-shrink-0 ${iconColor[finding.severity]}`} />
-              ) : finding.severity === "low" ? (
-                <CheckCircle2 className={`h-5 w-5 mt-0.5 flex-shrink-0 ${iconColor[finding.severity]}`} />
-              ) : (
-                <Info className={`h-5 w-5 mt-0.5 flex-shrink-0 ${iconColor[finding.severity]}`} />
-              )}
-              <div>
-                <p className="font-medium">{finding.message}</p>
-                <p className="text-sm text-zinc-400 mt-1">Severity: {finding.severity}</p>
-              </div>
-            </div>
+            <li
+              key={`${finding.severity}-${index}`}
+              className={`flex gap-2 rounded-xl border p-3 ${containerColor[finding.severity]}`}
+            >
+              <Icon className={`mt-0.5 h-4 w-4 flex-shrink-0 ${iconColor[finding.severity]}`} />
+              <p>{finding.message}</p>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 }
