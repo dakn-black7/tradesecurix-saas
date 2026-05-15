@@ -1,9 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Download, ShieldCheck, Sparkles, ArrowUpRight } from "lucide-react";
-import { Show, useUser } from "@clerk/nextjs";
 import { generateReport, formatRiskScore, getRiskColor } from "@/lib/report";
 
 interface HistoryRow {
@@ -16,38 +13,10 @@ interface HistoryRow {
 }
 
 const historyData: HistoryRow[] = [
-  {
-    id: "a1",
-    type: "Document",
-    name: "Invoice 99284",
-    date: "Apr 9, 2026",
-    riskScore: 16,
-    status: "Cleared",
-  },
-  {
-    id: "b2",
-    type: "Company",
-    name: "Astra Global Trade",
-    date: "Apr 7, 2026",
-    riskScore: 42,
-    status: "Review",
-  },
-  {
-    id: "c3",
-    type: "Document",
-    name: "Bill of Lading C12",
-    date: "Apr 3, 2026",
-    riskScore: 74,
-    status: "Flagged",
-  },
-  {
-    id: "d4",
-    type: "Company",
-    name: "Harbor Logistics Co.",
-    date: "Mar 29, 2026",
-    riskScore: 28,
-    status: "Review",
-  },
+  { id: "a1", type: "Document", name: "Invoice 99284", date: "Apr 9, 2026", riskScore: 16, status: "Cleared" },
+  { id: "b2", type: "Company", name: "Astra Global Trade", date: "Apr 7, 2026", riskScore: 42, status: "Review" },
+  { id: "c3", type: "Document", name: "Bill of Lading C12", date: "Apr 3, 2026", riskScore: 74, status: "Flagged" },
+  { id: "d4", type: "Company", name: "Harbor Logistics Co.", date: "Mar 29, 2026", riskScore: 28, status: "Review" },
 ];
 
 const statusClasses = {
@@ -56,33 +25,14 @@ const statusClasses = {
   Flagged: "bg-red-500/10 text-red-200",
 };
 
-function SignedOutRedirect() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace("/");
-  }, [router]);
-
-  return null;
-}
-
-function DashboardContent() {
-  const { user } = useUser();
-
+export default function DashboardPage() {
   const downloadReport = async (row: HistoryRow) => {
     const pdf = await generateReport({
       fileName: `${row.name} Report`,
       riskScore: row.riskScore,
-      findings: [
-        {
-          type: "info",
-          message: "Analysis completed by Trade Securix",
-          severity: "low",
-        },
-      ],
+      findings: [{ type: "info", message: "Analysis completed by Trade Securix", severity: "low" }],
       timestamp: row.date,
     });
-
     const url = window.URL.createObjectURL(pdf);
     const link = document.createElement("a");
     link.href = url;
@@ -103,9 +53,7 @@ function DashboardContent() {
                 <ShieldCheck className="h-4 w-4" />
                 Business Integrity Dashboard
               </div>
-              <h1 className="mt-6 text-3xl font-semibold tracking-tight text-white">
-                Welcome back, {user?.firstName || "User"}
-              </h1>
+              <h1 className="mt-6 text-3xl font-semibold tracking-tight text-white">Welcome back</h1>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-400">
                 A premium audit trail of verified documents and company checks. Secure, compliant, and ready for executive review.
               </p>
@@ -114,13 +62,12 @@ function DashboardContent() {
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-sm uppercase tracking-[0.25em] text-zinc-400">Active session</p>
-                  <p className="mt-1 text-lg font-semibold">{user?.emailAddresses[0]?.emailAddress || "Secure access enabled"}</p>
+                  <p className="mt-1 text-lg font-semibold">Secure access enabled</p>
                 </div>
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600/15 text-blue-300">
                   <Sparkles className="h-5 w-5" />
                 </div>
               </div>
-              <div className="mt-4 text-sm text-zinc-400">Use the user menu to manage your profile, sessions, and sign out securely.</div>
             </div>
           </div>
         </section>
@@ -169,9 +116,7 @@ function DashboardContent() {
                 {historyData.map((row) => (
                   <tr key={row.id} className="transition hover:bg-white/5">
                     <td className="px-6 py-4 font-semibold text-white">{row.type}</td>
-                    <td className="px-6 py-4">
-                      <div className="font-medium text-white">{row.name}</div>
-                    </td>
+                    <td className="px-6 py-4"><div className="font-medium text-white">{row.name}</div></td>
                     <td className="px-6 py-4 text-zinc-400">{row.date}</td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex rounded-full px-3 py-1 text-sm font-semibold ${getRiskColor(row.riskScore)}`}>
@@ -209,18 +154,5 @@ function DashboardContent() {
         </footer>
       </div>
     </main>
-  );
-}
-
-export default function DashboardPage() {
-  return (
-    <>
-      <Show when="signed-in">
-        <DashboardContent />
-      </Show>
-      <Show when="signed-out">
-        <SignedOutRedirect />
-      </Show>
-    </>
   );
 }
