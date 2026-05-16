@@ -21,9 +21,9 @@ export default function ReportProof() {
             <div className="flex items-start justify-between gap-6">
               <div>
                 <p className="text-sm uppercase tracking-[0.3em] text-zinc-500 mb-2">Example company</p>
-                <h3 className="text-3xl font-semibold text-white">Everbridge Logistics</h3>
+                <h3 className="text-3xl font-semibold text-white">Transaction Risk Report</h3>
                 <p className="mt-3 text-base text-zinc-400 max-w-xl">
-                  Sample counterparty assessment showing how TradeSecurix combines document review and company verification into a single risk report.
+                  A combined preview of document analysis and company verification used by trade operations teams before payment release.
                 </p>
               </div>
               <span className="rounded-full bg-blue-600/10 px-4 py-2 text-sm font-semibold text-blue-300 border border-blue-500/20">
@@ -33,25 +33,25 @@ export default function ReportProof() {
 
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
               <div className="rounded-3xl border border-white/10 bg-slate-950 p-5">
-                <p className="text-sm text-zinc-500">Risk score</p>
-                <p className="mt-3 text-3xl font-semibold text-white">71</p>
+                <p className="text-sm text-zinc-500">Fraud score</p>
+                <p className="mt-3 text-3xl font-semibold text-amber-300">74</p>
               </div>
               <div className="rounded-3xl border border-white/10 bg-slate-950 p-5">
-                <p className="text-sm text-zinc-500">Report status</p>
-                <p className="mt-3 text-3xl font-semibold text-white">Review needed</p>
+                <p className="text-sm text-zinc-500">Verification status</p>
+                <p className="mt-3 text-3xl font-semibold text-white">Conditional</p>
               </div>
               <div className="rounded-3xl border border-white/10 bg-slate-950 p-5">
-                <p className="text-sm text-zinc-500">Document type</p>
-                <p className="mt-3 text-3xl font-semibold text-white">Invoice</p>
+                <p className="text-sm text-zinc-500">Risk level</p>
+                <p className="mt-3 text-3xl font-semibold text-white">Medium</p>
               </div>
             </div>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
-                href="#contact"
+                href="/auth/signup"
                 className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
               >
-                View Report
+                Start Free Trial
               </Link>
               <Link
                 href="#contact"
@@ -76,16 +76,16 @@ export default function ReportProof() {
             </div>
             <div className="space-y-5">
               <div className="rounded-3xl border border-white/10 bg-gray-900 p-5">
-                <p className="text-sm text-zinc-500">Verified counterparty</p>
-                <p className="mt-2 text-lg font-semibold text-white">Everbridge Logistics</p>
-                <p className="mt-3 text-sm text-zinc-400">Confirmed registration and document metadata for KYC support.</p>
+                <p className="text-sm text-zinc-500">Document Analysis Preview</p>
+                <p className="mt-2 text-lg font-semibold text-white">Uploaded invoice and highlighted mismatch regions</p>
+                <p className="mt-3 text-sm text-zinc-400">Detected amount variance, beneficiary inconsistency, and altered issue date metadata.</p>
               </div>
               <div className="rounded-3xl border border-white/10 bg-gray-900 p-5">
-                <p className="text-sm text-zinc-500">Document checks</p>
+                <p className="text-sm text-zinc-500">Company Verification Preview</p>
                 <ul className="mt-3 space-y-2 text-sm text-zinc-400">
-                  <li>• Signature validation</li>
-                  <li>• Company registration match</li>
-                  <li>• Invoice reference consistency</li>
+                  <li>• Trust score: 68/100</li>
+                  <li>• Country registry: matched</li>
+                  <li>• Business status: active</li>
                 </ul>
               </div>
               <div className="rounded-3xl border border-white/10 bg-gray-900 p-5">

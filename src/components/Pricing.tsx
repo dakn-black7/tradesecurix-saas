@@ -1,138 +1,83 @@
-import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import CheckoutButton from "@/components/CheckoutButton";
 
-const tiers = [
-  {
-    name: "Starter",
-    subtitle: "For Independent Traders",
-    price: "$299",
-    period: "/month",
-    description: "Perfect for freelance traders and small operations",
-    features: [
-      "Up to 100 document analyses/month",
-      "Company verification (basic registry lookup)",
-      "Risk scoring",
-      "Email support",
-      "7-day support response",
-      "CSV export",
-    ],
-    cta: "Start Free Trial",
-    featured: false,
-  },
-  {
-    name: "Professional",
-    subtitle: "For Trading Desks & Firms",
-    price: "$999",
-    period: "/month",
-    description: "Most popular for active trading operations",
-    features: [
-      "Unlimited document analyses",
-      "Advanced counterparty intelligence",
-      "Real-time alerts & monitoring",
-      "API access with webhooks",
-      "Priority 24/5 support",
-      "SLA guarantee (99.5% uptime)",
-      "Custom risk thresholds",
-      "Audit-ready compliance reports",
-      "Team management (up to 10 users)",
-    ],
-    cta: "Request Demo",
-    featured: true,
-  },
-  {
-    name: "Enterprise",
-    subtitle: "For Institutions",
-    price: "Custom",
-    period: "Contact sales",
-    description: "Dedicated support and custom solutions",
-    features: [
-      "Everything in Professional",
-      "Dedicated account manager",
-      "Custom risk models & algorithms",
-      "White-label deployment option",
-      "On-premise deployment available",
-      "24/7 phone & email support",
-      "Compliance consulting included",
-      "Unlimited team users",
-      "SLA guarantee (99.99% uptime)",
-    ],
-    cta: "Contact Sales",
-    featured: false,
-  },
+const documentPlans = [
+  { name: "Starter", price: "$49", planKey: "doc_starter", featured: false },
+  { name: "Pro", price: "$149", planKey: "doc_pro", featured: true },
+  { name: "Enterprise", price: "Custom", planKey: "doc_enterprise", featured: false },
 ];
+
+const companyPlans = [
+  { name: "Basic", price: "$99", planKey: "comp_basic", featured: false },
+  { name: "Global", price: "$299", planKey: "comp_global", featured: true },
+  { name: "Enterprise", price: "Custom", planKey: "comp_enterprise", featured: false },
+];
+
+function planCta(planKey: string) {
+  if (planKey.includes("enterprise")) {
+    return (
+      <Link
+        href="#contact"
+        className="inline-flex h-11 w-full items-center justify-center rounded-xl border border-white/20 text-sm font-semibold text-white transition hover:bg-white/10"
+      >
+        Contact Sales
+      </Link>
+    );
+  }
+
+  return (
+    <CheckoutButton
+      planKey={planKey}
+      className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-cyan-400 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+    >
+      Start Free Trial
+    </CheckoutButton>
+  );
+}
+
+function PricingGrid({
+  title,
+  plans,
+}: {
+  title: string;
+  plans: { name: string; price: string; planKey: string; featured: boolean }[];
+}) {
+  return (
+    <div className="rounded-[1.75rem] border border-white/10 bg-slate-900/80 p-7">
+      <h3 className="text-xl font-semibold text-white">{title}</h3>
+      <div className="mt-5 grid gap-4 md:grid-cols-3">
+        {plans.map((plan) => (
+          <div
+            key={plan.planKey}
+            className={`rounded-2xl border p-5 ${
+              plan.featured
+                ? "border-cyan-400/40 bg-cyan-500/10 shadow-[0_0_40px_rgba(34,211,238,0.12)]"
+                : "border-white/10 bg-slate-950"
+            }`}
+          >
+            <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">{plan.name}</p>
+            <p className="mt-3 text-3xl font-semibold text-white">{plan.price}</p>
+            <p className="mt-1 text-sm text-zinc-500">per month • subscription</p>
+            <div className="mt-5">{planCta(plan.planKey)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-20 px-6 border-t border-gray-800">
+    <section id="pricing" className="py-20 px-6 border-t border-gray-800 bg-slate-950">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Transparent Pricing, No Hidden Fees
-          </h2>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Choose the plan that fits your trading operation. All plans include 14-day free trial.
-          </p>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white">Subscription Plans</h2>
+          <p className="mt-3 text-lg text-zinc-400">All paid plans include a 14-day trial, card required, and recurring billing.</p>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-6">
-          {tiers.map((tier, idx) => (
-            <div
-              key={idx}
-              className={`relative rounded-xl border transition transform hover:scale-105 ${
-                tier.featured
-                  ? "bg-blue-600/10 border-blue-500/50 ring-2 ring-blue-500 lg:scale-105 shadow-2xl shadow-blue-500/20"
-                  : "bg-gray-900/50 border-gray-800"
-              } p-8`}
-            >
-              {tier.featured && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold">
-                  Most Popular
-                </div>
-              )}
-
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold mb-1">{tier.name}</h3>
-                <p className="text-sm text-zinc-400 mb-4">{tier.subtitle}</p>
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="text-4xl font-bold">{tier.price}</span>
-                  <span className="text-zinc-400 text-sm">{tier.period}</span>
-                </div>
-                <p className="text-sm text-zinc-400">{tier.description}</p>
-              </div>
-
-              <Link
-                href="#contact"
-                className={`block w-full py-3 rounded-lg font-semibold text-center transition mb-8 ${
-                  tier.featured
-                    ? "bg-blue-600 hover:bg-blue-500 text-white"
-                    : "border border-gray-700 hover:bg-gray-800"
-                }`}
-              >
-                {tier.cta}
-              </Link>
-
-              <div className="space-y-3">
-                {tier.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-zinc-300">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* FAQ Note */}
-        <div className="mt-16 text-center">
-          <p className="text-zinc-400">
-            Questions about pricing?{" "}
-            <Link href="#contact" className="text-blue-400 hover:text-blue-300 font-semibold">
-              Get in touch with our sales team
-            </Link>
-          </p>
+        <div className="space-y-6">
+          <PricingGrid title="Document Analysis" plans={documentPlans} />
+          <PricingGrid title="Company Verification" plans={companyPlans} />
         </div>
       </div>
     </section>

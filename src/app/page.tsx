@@ -8,6 +8,7 @@ import Security from "@/components/Security";
 import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import ExitIntent from "@/components/ExitIntent";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -22,6 +23,7 @@ export default function Home() {
       <HowItWorks />
       <Pricing />
       <Security />
+      <ExitIntent />
       <FAQ />
       <ContactForm />
       <Footer />

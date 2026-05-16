@@ -1,11 +1,17 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-// Passthrough middleware — add Clerk/auth protection here once keys are configured
-export function middleware(req: NextRequest) {
-  return NextResponse.next();
-}
+const isProtectedRoute = createRouteMatcher([
+  '/dashboard(.*)',
+  '/upload(.*)',
+  '/verification(.*)',
+]);
+
+export default clerkMiddleware(async (auth, req) => {
+  if (isProtectedRoute(req)) {
+    await auth.protect();
+  }
+});
 
 export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)'],
+  matcher: ['/((?!.*\\..*|_next).*)', '/(api|trpc)(.*)'],
 };

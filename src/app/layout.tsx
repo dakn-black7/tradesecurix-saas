@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "TradeSecurix | Secure Trade Document Verification",
@@ -11,8 +12,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="dark">
       <body className="antialiased">
-        <Navbar />
-        {children}
+        <ClerkProvider>
+          <Navbar />
+          {children}
+        </ClerkProvider>
       </body>
     </html>
   );

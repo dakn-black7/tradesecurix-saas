@@ -1,12 +1,15 @@
 "use client";
 import Link from "next/link";
 import { X, Twitter, Linkedin } from "lucide-react";
+import { UserButton, useAuth } from "@clerk/nextjs";
 
 interface MobileSidebarProps {
   onClose: () => void;
 }
 
 export default function MobileSidebar({ onClose }: MobileSidebarProps) {
+  const { isSignedIn } = useAuth();
+
   return (
     <div className="fixed inset-0 z-50 md:hidden">
       <div
@@ -27,20 +30,39 @@ export default function MobileSidebar({ onClose }: MobileSidebarProps) {
           <Link href="#security" onClick={onClose} className="block text-lg font-medium text-zinc-300 hover:text-white transition">Security</Link>
         </div>
         <div className="px-6 py-4 border-t border-gray-800 space-y-3">
-          <Link
-            href="/auth/login"
-            onClick={onClose}
-            className="block w-full py-3 text-center text-sm font-semibold text-zinc-300 border border-gray-700 rounded-xl hover:border-gray-500 hover:text-white transition"
-          >
-            Sign In
-          </Link>
-          <Link
-            href="/auth/signup"
-            onClick={onClose}
-            className="block w-full py-3 text-center bg-blue-600 hover:bg-blue-500 font-semibold rounded-xl transition text-white text-sm"
-          >
-            Start Free Trial
-          </Link>
+          {!isSignedIn ? (
+            <>
+            <Link
+              href="/auth/login"
+              onClick={onClose}
+              className="block w-full py-3 text-center text-sm font-semibold text-zinc-300 border border-gray-700 rounded-xl hover:border-gray-500 hover:text-white transition"
+            >
+              Login
+            </Link>
+            <Link
+              href="/auth/signup"
+              onClick={onClose}
+              className="block w-full py-3 text-center bg-blue-600 hover:bg-blue-500 font-semibold rounded-xl transition text-white text-sm"
+            >
+              Start Free Trial
+            </Link>
+            </>
+          ) : (
+            <>
+            <Link href="/dashboard" onClick={onClose} className="block w-full py-3 text-center text-sm font-semibold text-zinc-300 border border-gray-700 rounded-xl hover:border-gray-500 hover:text-white transition">
+              Dashboard
+            </Link>
+            <Link href="/upload" onClick={onClose} className="block w-full py-3 text-center text-sm font-semibold text-zinc-300 border border-gray-700 rounded-xl hover:border-gray-500 hover:text-white transition">
+              Upload
+            </Link>
+            <Link href="/verification" onClick={onClose} className="block w-full py-3 text-center text-sm font-semibold text-zinc-300 border border-gray-700 rounded-xl hover:border-gray-500 hover:text-white transition">
+              Verification
+            </Link>
+            <div className="flex justify-center pt-2">
+              <UserButton />
+            </div>
+            </>
+          )}
           <div className="flex items-center justify-center gap-4 pt-4">
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-gray-800 rounded-lg transition text-zinc-400 hover:text-white">
               <Twitter className="h-5 w-5" />
