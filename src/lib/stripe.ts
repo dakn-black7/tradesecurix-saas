@@ -1,13 +1,10 @@
 import Stripe from "stripe";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error("STRIPE_SECRET_KEY environment variable is not set");
+function getStripe(): Stripe {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) throw new Error("STRIPE_SECRET_KEY environment variable is not set");
+  return new Stripe(key, { apiVersion: "2026-04-22.dahlia" as any });
 }
-
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2026-04-22.dahlia",
-  typescript: true,
-});
 
 export const PLANS = {
   documentAnalysis: [
@@ -129,7 +126,7 @@ export async function createCheckoutSession({
   email?: string;
   trialDays?: number;
 }) {
-  const session = await stripe.checkout.sessions.create({
+  const session = await getStripe().checkout.sessions.create({
     mode: "subscription",
     payment_method_types: ["card"],
     line_items: [{ price: priceId, quantity: 1 }],
@@ -147,7 +144,7 @@ export async function createCheckoutSession({
 }
 
 export async function createCustomerPortalSession(customerId: string) {
-  const session = await stripe.billingPortal.sessions.create({
+  const session = await getStripe().billingPortal.sessions.create({
     customer: customerId,
     return_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
   });

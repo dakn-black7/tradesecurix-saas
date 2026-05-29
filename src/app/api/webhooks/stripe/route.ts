@@ -2,11 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
-  apiVersion: "2026-04-22.dahlia",
-});
-
 export async function POST(request: NextRequest) {
+  const stripeKey = process.env.STRIPE_SECRET_KEY;
+  if (!stripeKey) {
+    return NextResponse.json({ error: "Stripe not configured" }, { status: 500 });
+  }
+  const stripe = new Stripe(stripeKey, { apiVersion: "2026-04-22.dahlia" as any });
+
   const body = await request.text();
   const headersList = await headers();
   const signature = headersList.get("stripe-signature");
