@@ -1,6 +1,8 @@
 "use client";
-import { Upload, Loader2 } from "lucide-react";
+import { Upload, Loader2, AlertCircle } from "lucide-react";
 import { useState } from "react";
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 interface UploadCardProps {
   isLoading?: boolean;
@@ -9,6 +11,16 @@ interface UploadCardProps {
 
 export default function UploadCard({ isLoading = false, onFileSelect }: UploadCardProps) {
   const [dragActive, setDragActive] = useState(false);
+  const [sizeError, setSizeError] = useState(false);
+
+  const handleFile = (file: File) => {
+    if (file.size > MAX_FILE_SIZE) {
+      setSizeError(true);
+      return;
+    }
+    setSizeError(false);
+    onFileSelect(file);
+  };
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -23,21 +35,21 @@ export default function UploadCard({ isLoading = false, onFileSelect }: UploadCa
 
     const files = e.dataTransfer.files;
     if (files && files.length > 0) {
-      onFileSelect(files[0]);
+      handleFile(files[0]);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
-      onFileSelect(files[0]);
+      handleFile(files[0]);
     }
   };
 
   return (
     <div
       className={`border-2 border-dashed rounded-2xl p-12 text-center transition ${
-        dragActive ? "border-blue-500 bg-blue-600/10" : "border-gray-700 bg-gray-800/50"
+        dragActive ? "border-blue-500 bg-blue-600/10" : sizeError ? "border-red-500 bg-red-600/10" : "border-gray-700 bg-gray-800/50"
       }`}
       onDragEnter={handleDrag}
       onDragLeave={handleDrag}
@@ -52,21 +64,30 @@ export default function UploadCard({ isLoading = false, onFileSelect }: UploadCa
         </div>
       ) : (
         <div className="flex flex-col items-center gap-4">
-          <Upload className="h-12 w-12 text-blue-600" />
+          {sizeError ? (
+            <AlertCircle className="h-12 w-12 text-red-400" />
+          ) : (
+            <Upload className="h-12 w-12 text-blue-600" />
+          )}
           <div>
             <p className="text-lg font-semibold mb-1">Upload your document</p>
-            <p className="text-zinc-400">Drag and drop or click to select</p>
+            {sizeError ? (
+              <p className="text-red-400 text-sm">File exceeds 10MB limit. Please choose a smaller file.</p>
+            ) : (
+              <p className="text-zinc-400">Drag and drop or click to select</p>
+            )}
           </div>
           <input
             type="file"
             onChange={handleChange}
             disabled={isLoading}
             className="hidden"
-            accept=".pdf,.doc,.docx,.xls,.xlsx"
+            accept=".pdf,.jpg,.jpeg,.png"
             id="file-upload"
           />
           <label htmlFor="file-upload">
             <button
+              type="button"
               disabled={isLoading}
               className="px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-xl font-semibold disabled:opacity-50"
               onClick={() => document.getElementById("file-upload")?.click()}
@@ -74,7 +95,7 @@ export default function UploadCard({ isLoading = false, onFileSelect }: UploadCa
               Select File
             </button>
           </label>
-          <p className="text-xs text-zinc-500">PDF, DOC, DOCX, XLS, XLSX up to 10MB</p>
+          <p className="text-xs text-zinc-500">PDF, JPG, PNG up to 10MB</p>
         </div>
       )}
     </div>

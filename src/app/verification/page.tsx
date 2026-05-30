@@ -12,7 +12,7 @@ export default async function VerificationPage() {
     redirect("/auth/signup");
   }
 
-  const hasAccess = false; // later from DB
+  const hasAccess = true; // All authenticated users have access in MVP
 
   if (!hasAccess) {
     return (

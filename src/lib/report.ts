@@ -133,6 +133,26 @@ export const generateReportPDF = async (data: ReportData): Promise<Blob> => {
 
   doc.text(recommendation, 14, y, { maxWidth: pageWidth - 28 });
 
+  // Disclaimer Section
+  y += 30;
+  if (y > 250) { doc.addPage(); y = 20; }
+  doc.setFillColor(245, 200, 60);
+  doc.rect(14, y, pageWidth - 28, 1, "F");
+  y += 6;
+  doc.setFontSize(8);
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(160, 100, 0);
+  doc.text("IMPORTANT DISCLAIMER", 14, y);
+  y += 5;
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(120, 80, 0);
+  const disclaimer =
+    "This report is provided for due diligence support purposes only and does not constitute financial, legal, or professional advice. " +
+    "TradeSecurix does not guarantee the accuracy, completeness, or timeliness of this analysis. " +
+    "Users must conduct their own independent verification and seek qualified professional advice before making any financial or business decisions. " +
+    "TradeSecurix accepts no liability for any losses arising from reliance on this report.";
+  doc.text(disclaimer, 14, y, { maxWidth: pageWidth - 28 });
+
   // Footer
   const pageCount = doc.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
@@ -140,7 +160,7 @@ export const generateReportPDF = async (data: ReportData): Promise<Blob> => {
     doc.setTextColor(150, 150, 150);
     doc.setFontSize(8);
     doc.text(
-      `TradeSecurix — Confidential | Page ${i} of ${pageCount}`,
+      `TradeSecurix — Confidential | For Due Diligence Support Only — Not Financial Advice | Page ${i} of ${pageCount}`,
       pageWidth / 2,
       doc.internal.pageSize.getHeight() - 10,
       { align: "center" }
