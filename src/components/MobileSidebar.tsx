@@ -1,6 +1,7 @@
 "use client";
+
 import Link from "next/link";
-import { X, Twitter, Linkedin } from "lucide-react";
+import { Shield, X } from "lucide-react";
 import { UserButton, useAuth } from "@clerk/nextjs";
 
 interface MobileSidebarProps {
@@ -10,69 +11,64 @@ interface MobileSidebarProps {
 export default function MobileSidebar({ onClose }: MobileSidebarProps) {
   const { isSignedIn } = useAuth();
 
+  const navItems = [
+    { href: "/#features", label: "Product" },
+    { href: "/#how-it-works", label: "How It Works" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/#security", label: "Security" },
+  ];
+
   return (
-    <div className="fixed inset-0 z-50 md:hidden">
-      <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      <div className="absolute right-0 top-0 bottom-0 w-full max-w-xs bg-gray-900 border-l border-gray-800 shadow-2xl flex flex-col">
-        <div className="flex items-center justify-between p-6 border-b border-gray-800">
-          <span className="font-bold text-xl">Menu</span>
-          <button onClick={onClose} className="p-2 hover:bg-gray-800 rounded-lg transition">
+    <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+      <button className="absolute inset-0 h-full w-full bg-slate-950/45 backdrop-blur-sm" onClick={onClose} aria-label="Close navigation" />
+
+      <aside className="absolute right-0 top-0 flex h-full w-[88%] max-w-sm flex-col border-l border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-950">
+        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-800">
+          <Link href="/" onClick={onClose} className="flex items-center gap-2.5">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-950 text-white dark:bg-white dark:text-slate-950"><Shield className="h-5 w-5" /></span>
+            <span className="text-lg font-bold tracking-tight text-slate-950 dark:text-white">Trade<span className="text-blue-600">Securix</span></span>
+          </Link>
+          <button onClick={onClose} className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-700 transition hover:bg-slate-100 dark:border-slate-800 dark:text-slate-200 dark:hover:bg-slate-900" aria-label="Close menu">
             <X className="h-5 w-5" />
           </button>
         </div>
-        <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4">
-          <Link href="#features" onClick={onClose} className="block text-lg font-medium text-zinc-300 hover:text-white transition">Features</Link>
-          <Link href="#how-it-works" onClick={onClose} className="block text-lg font-medium text-zinc-300 hover:text-white transition">How It Works</Link>
-          <Link href="/pricing" onClick={onClose} className="block text-lg font-medium text-zinc-300 hover:text-white transition">Pricing</Link>
-          <Link href="#security" onClick={onClose} className="block text-lg font-medium text-zinc-300 hover:text-white transition">Security</Link>
+
+        <div className="flex-1 overflow-y-auto px-5 py-6">
+          <nav className="space-y-1">
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href} onClick={onClose} className="flex min-h-12 items-center rounded-xl px-4 text-base font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-900 dark:hover:text-white">
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          {isSignedIn && (
+            <div className="mt-6 border-t border-slate-200 pt-6 dark:border-slate-800">
+              <p className="mb-3 px-4 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Workspace</p>
+              <div className="space-y-1">
+                <Link href="/dashboard" onClick={onClose} className="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900">Dashboard</Link>
+                <Link href="/upload" onClick={onClose} className="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900">Document Analysis</Link>
+                <Link href="/verification" onClick={onClose} className="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900">Counterparty Check</Link>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="px-6 py-4 border-t border-gray-800 space-y-3">
+
+        <div className="border-t border-slate-200 bg-slate-50 px-5 py-5 dark:border-slate-800 dark:bg-slate-900/40">
           {!isSignedIn ? (
-            <>
-            <Link
-              href="/auth/login"
-              onClick={onClose}
-              className="block w-full py-3 text-center text-sm font-semibold text-zinc-300 border border-gray-700 rounded-xl hover:border-gray-500 hover:text-white transition"
-            >
-              Login
-            </Link>
-            <Link
-              href="/auth/signup"
-              onClick={onClose}
-              className="block w-full py-3 text-center bg-blue-600 hover:bg-blue-500 font-semibold rounded-xl transition text-white text-sm"
-            >
-              Start Free Trial
-            </Link>
-            </>
+            <div className="space-y-3">
+              <Link href="/#contact" onClick={onClose} className="flex min-h-12 w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-4 text-sm font-bold text-slate-900 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900">Request Demo</Link>
+              <Link href="/auth/signup" onClick={onClose} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-blue-600 px-4 text-sm font-bold text-white shadow-sm transition hover:bg-blue-500">Start 7-Day Free Trial</Link>
+              <Link href="/auth/login" onClick={onClose} className="block py-2 text-center text-sm font-semibold text-slate-500 transition hover:text-slate-950 dark:text-slate-400 dark:hover:text-white">Already a customer? Sign in</Link>
+            </div>
           ) : (
-            <>
-            <Link href="/dashboard" onClick={onClose} className="block w-full py-3 text-center text-sm font-semibold text-zinc-300 border border-gray-700 rounded-xl hover:border-gray-500 hover:text-white transition">
-              Dashboard
-            </Link>
-            <Link href="/upload" onClick={onClose} className="block w-full py-3 text-center text-sm font-semibold text-zinc-300 border border-gray-700 rounded-xl hover:border-gray-500 hover:text-white transition">
-              Upload
-            </Link>
-            <Link href="/verification" onClick={onClose} className="block w-full py-3 text-center text-sm font-semibold text-zinc-300 border border-gray-700 rounded-xl hover:border-gray-500 hover:text-white transition">
-              Verification
-            </Link>
-            <div className="flex justify-center pt-2">
+            <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3 dark:border-slate-800 dark:bg-slate-950">
+              <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">Account</span>
               <UserButton />
             </div>
-            </>
           )}
-          <div className="flex items-center justify-center gap-4 pt-4">
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-gray-800 rounded-lg transition text-zinc-400 hover:text-white">
-              <Twitter className="h-5 w-5" />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-gray-800 rounded-lg transition text-zinc-400 hover:text-white">
-              <Linkedin className="h-5 w-5" />
-            </a>
-          </div>
         </div>
-      </div>
+      </aside>
     </div>
   );
 }

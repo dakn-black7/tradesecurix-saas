@@ -1,162 +1,80 @@
 import Link from "next/link";
-import { Twitter, Linkedin, Youtube, Instagram } from "lucide-react";
+import { Shield } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-800 bg-gray-950 px-6 py-16">
-      <div className="max-w-7xl mx-auto">
-        {/* Main Footer Content */}
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
-          {/* Company Info */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">
-              <span className="text-white">Trade</span>
-              <span className="text-blue-600">Securix</span>
-            </h3>
-            <p className="text-sm text-zinc-400 mb-4 leading-relaxed">
-              Institutional-grade trade verification and counterparty risk assessment.
+    <footer className="border-t border-slate-200 bg-white px-4 py-14 text-slate-900 dark:border-slate-800 dark:bg-slate-950 dark:text-white sm:px-6">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-12 rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/60 sm:p-8 lg:flex lg:items-center lg:justify-between lg:gap-10">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">Trade risk intelligence</p>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">Review the transaction before money or goods move.</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400 sm:text-base">
+              See how TradeSecurix brings counterparty checks, document review and transaction risk signals into one workspace.
             </p>
-            <div className="space-y-1 text-xs text-zinc-500">
-              <p>
-                <strong>Trade Securix LLC</strong>
-              </p>
-              <p>(In Formation)</p>
-              <p>Randall Ave Ste 100</p>
-              <p>WY 82001, USA</p>
+          </div>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:mt-0 lg:shrink-0">
+            <Link
+              href="#contact"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-300 bg-white px-5 text-sm font-bold text-slate-900 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
+            >
+              Request Demo
+            </Link>
+            <Link
+              href="/auth/signup"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl bg-blue-600 px-5 text-sm font-bold text-white shadow-sm transition hover:bg-blue-500"
+            >
+              Start 7-Day Free Trial
+            </Link>
+          </div>
+        </div>
+
+        <div className="grid gap-10 border-b border-slate-200 pb-10 dark:border-slate-800 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <Link href="/" className="flex items-center gap-2.5">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-950 text-white dark:bg-white dark:text-slate-950">
+                <Shield className="h-5 w-5" />
+              </span>
+              <span className="text-lg font-bold tracking-tight">Trade<span className="text-blue-600">Securix</span></span>
+            </Link>
+            <p className="mt-4 max-w-xs text-sm leading-6 text-slate-600 dark:text-slate-400">
+              Decision-support tools for international trade document and counterparty risk review.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold">Product</h3>
+            <div className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
+              <Link href="#features" className="block hover:text-slate-950 dark:hover:text-white">Product</Link>
+              <Link href="#how-it-works" className="block hover:text-slate-950 dark:hover:text-white">How It Works</Link>
+              <Link href="/pricing" className="block hover:text-slate-950 dark:hover:text-white">Pricing</Link>
+              <Link href="#security" className="block hover:text-slate-950 dark:hover:text-white">Security</Link>
             </div>
           </div>
 
-          {/* Product Links */}
           <div>
-            <h4 className="font-semibold mb-4">Product</h4>
-            <ul className="space-y-3 text-sm text-zinc-400">
-              <li>
-                <Link href="#features" className="hover:text-white transition">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link href="#pricing" className="hover:text-white transition">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link href="#security" className="hover:text-white transition">
-                  Security
-                </Link>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  API Docs
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Legal</h4>
-            <ul className="space-y-3 text-sm text-zinc-400">
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Terms of Service
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Risk Disclaimer
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition">
-                  Compliance
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact & Social */}
-          <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
-            <div className="space-y-3 text-sm text-zinc-400 mb-6">
-              <p>
-                <a
-                  href="mailto:contact@tradesecurix.com"
-                  className="text-blue-400 hover:text-blue-300 transition"
-                >
-                  contact@tradesecurix.com
-                </a>
-              </p>
-              <p>
-                <a href="#" className="hover:text-white transition">
-                  Request Demo
-                </a>
-              </p>
+            <h3 className="text-sm font-bold">Use cases</h3>
+            <div className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
+              <p>Importers & Exporters</p>
+              <p>Insurance</p>
+              <p>Banks & Trade Finance</p>
+              <p>Freight Forwarders</p>
             </div>
+          </div>
 
-            {/* Social Icons */}
-            <div className="flex items-center gap-3">
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 hover:bg-gray-800 rounded-lg transition text-zinc-400 hover:text-white"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 hover:bg-gray-800 rounded-lg transition text-zinc-400 hover:text-white"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 hover:bg-gray-800 rounded-lg transition text-zinc-400 hover:text-white"
-              >
-                <Youtube className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 hover:bg-gray-800 rounded-lg transition text-zinc-400 hover:text-white"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
+          <div>
+            <h3 className="text-sm font-bold">Contact</h3>
+            <div className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
+              <a href="mailto:contact@tradesecurix.com" className="block hover:text-slate-950 dark:hover:text-white">contact@tradesecurix.com</a>
+              <Link href="#contact" className="block hover:text-slate-950 dark:hover:text-white">Request Demo</Link>
             </div>
           </div>
         </div>
 
-        {/* Risk Disclaimer */}
-        <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-6 mb-12">
-          <h4 className="font-semibold text-sm mb-3 text-zinc-300">Risk Disclaimer</h4>
-          <p className="text-xs text-zinc-400 leading-relaxed">
-            TradeSecurix provides tools to support due diligence and risk assessment in trade transactions. 
-            Our analysis is not a guarantee of counterparty legitimacy. Users remain responsible for independent 
-            verification and compliance with applicable laws and regulations. Past analysis accuracy does not guarantee 
-            future results. Trade involves substantial risk of loss. Use TradeSecurix as one tool among many in your 
-            risk management framework, not as the sole basis for trading decisions.
-          </p>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-          <p>&copy; 2026 Trade Securix LLC. All rights reserved.</p>
-          <p>
-            Designed for institutional-grade trade verification.{" "}
-            <a href="#" className="text-blue-400 hover:text-blue-300">
-              Status
-            </a>
+        <div className="flex flex-col gap-3 pt-7 text-xs leading-5 text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 TradeSecurix. All rights reserved.</p>
+          <p className="max-w-2xl sm:text-right">
+            TradeSecurix supports human due diligence and risk review. It does not guarantee the legitimacy, solvency or performance of any counterparty.
           </p>
         </div>
       </div>
