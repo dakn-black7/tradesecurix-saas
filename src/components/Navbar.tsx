@@ -1,6 +1,7 @@
 "use client";
+
 import Link from "next/link";
-import { Shield, Menu, X } from "lucide-react";
+import { Menu, Shield, X } from "lucide-react";
 import { useState } from "react";
 import MobileSidebar from "./MobileSidebar";
 import { UserButton, useAuth } from "@clerk/nextjs";
@@ -11,84 +12,86 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-40 border-b border-gray-800 bg-gray-950/80 backdrop-blur-md px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <Shield className="h-8 w-8 text-blue-600" />
-            <div className="font-bold text-2xl tracking-tight hidden sm:block">
-              <span className="text-white">Trade</span>
-              <span className="text-blue-600">Securix</span>
-            </div>
+      <nav className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 px-4 py-3 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/88 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
+          <Link href="/" className="flex min-w-0 items-center gap-2.5" aria-label="TradeSecurix home">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-950 text-white shadow-sm dark:bg-white dark:text-slate-950">
+              <Shield className="h-5 w-5" />
+            </span>
+            <span className="truncate text-lg font-bold tracking-tight text-slate-950 dark:text-white sm:text-xl">
+              Trade<span className="text-blue-600">Securix</span>
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <Link href="#features" className="text-zinc-300 hover:text-white transition">
-              Features
+          <div className="hidden items-center gap-7 text-sm font-medium lg:flex">
+            <Link href="#features" className="text-slate-600 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
+              Product
             </Link>
-            <Link href="#how-it-works" className="text-zinc-300 hover:text-white transition">
+            <Link href="#how-it-works" className="text-slate-600 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
               How It Works
             </Link>
-            <Link href="/pricing" className="text-zinc-300 hover:text-white transition">
+            <Link href="/pricing" className="text-slate-600 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
               Pricing
             </Link>
-            <Link href="#security" className="text-zinc-300 hover:text-white transition">
+            <Link href="#security" className="text-slate-600 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
               Security
             </Link>
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden items-center gap-2 md:flex">
             {!isSignedIn ? (
               <>
-              <Link
-                href="/auth/login"
-                className="px-4 py-2 text-sm font-semibold text-zinc-300 hover:text-white transition"
-              >
-                Login
-              </Link>
-              <Link
-                href="/auth/signup"
-                className="px-5 py-2 text-sm font-semibold bg-blue-600 text-white rounded-xl shadow-sm hover:bg-blue-500 transition"
-              >
-                Start Free Trial
-              </Link>
+                <Link
+                  href="/auth/login"
+                  className="rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="#contact"
+                  className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:border-slate-400 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
+                >
+                  Request Demo
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500"
+                >
+                  Start 7-Day Trial
+                </Link>
               </>
             ) : (
               <>
-              <Link href="/dashboard" className="px-4 py-2 text-sm font-semibold text-zinc-300 hover:text-white transition">
-                Dashboard
-              </Link>
-              <Link href="/upload" className="px-4 py-2 text-sm font-semibold text-zinc-300 hover:text-white transition">
-                Upload
-              </Link>
-              <Link href="/verification" className="px-4 py-2 text-sm font-semibold text-zinc-300 hover:text-white transition">
-                Verification
-              </Link>
-              <UserButton />
+                <Link href="/dashboard" className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900">
+                  Dashboard
+                </Link>
+                <UserButton />
               </>
             )}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 hover:bg-gray-800 rounded-lg transition"
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
+          <div className="flex items-center gap-2 md:hidden">
+            {!isSignedIn && (
+              <Link
+                href="#contact"
+                className="hidden rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-900 dark:border-slate-700 dark:text-white min-[390px]:inline-flex"
+              >
+                Demo
+              </Link>
             )}
-          </button>
+            <button
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-900 shadow-sm transition hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* Mobile Sidebar */}
-      {isMobileMenuOpen && (
-        <MobileSidebar onClose={() => setIsMobileMenuOpen(false)} />
-      )}
+      {isMobileMenuOpen && <MobileSidebar onClose={() => setIsMobileMenuOpen(false)} />}
     </>
   );
 }
