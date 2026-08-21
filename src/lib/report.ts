@@ -19,15 +19,13 @@ export interface CompanyVerification {
 export const generateReportPDF = async (data: ReportData): Promise<Blob> => {
   const normalizedFindings = normalizeFindings(data.findings);
 
-  // This would integrate with a PDF generation library like jsPDF or pdfkit
-  // For now, returning a placeholder
   const content = `
     Report: ${data.fileName}
     Risk Score: ${data.riskScore}
     Timestamp: ${data.timestamp}
 
     Findings:
-    ${normalizedFindings.map(f => `- ${f.type.toUpperCase()}: ${f.message} (Severity: ${f.severity})`).join('\n')}
+    ${normalizedFindings.map(f => `- ${f.severity.toUpperCase()}: ${f.message}`).join('\n')}
   `;
 
   return new Blob([content], { type: "application/pdf" });
