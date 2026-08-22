@@ -1,59 +1,47 @@
-import { Shield, Lock, FileCheck } from "lucide-react";
+import { Shield, LockKeyhole, FileCheck2 } from "lucide-react";
 
 export default function Security() {
   return (
-    <section id="security" className="py-20 px-6 border-t border-gray-800">
+    <section id="security" className="py-16 px-6 border-t border-gray-800">
       <div className="max-w-5xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Enterprise Security & Compliance
-          </h2>
-          <p className="text-xl text-zinc-400">
-            Your data security is non-negotiable. Built with institutional-grade standards.
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Security by design</h2>
+          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+            TradeSecurix is being built to handle sensitive trade-review workflows with controlled access, clear accountability and responsible data handling.
           </p>
         </div>
 
-        {/* Security Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8">
-            <Shield className="h-12 w-12 text-green-500 mb-4" />
-            <h3 className="text-lg font-bold mb-3">SOC 2 Type II</h3>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-7">
+            <Shield className="h-10 w-10 text-green-500 mb-4" />
+            <h3 className="text-lg font-bold mb-3">Authenticated access</h3>
             <p className="text-zinc-400">
-              Annual independent security audits. Full compliance with SOC 2 requirements for security, availability, and confidentiality.
+              User access is handled through the application authentication layer, with protected areas separated from the public site.
             </p>
           </div>
 
-          <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8">
-            <Lock className="h-12 w-12 text-blue-500 mb-4" />
-            <h3 className="text-lg font-bold mb-3">256-Bit Encryption</h3>
+          <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-7">
+            <LockKeyhole className="h-10 w-10 text-blue-500 mb-4" />
+            <h3 className="text-lg font-bold mb-3">Secure transport</h3>
             <p className="text-zinc-400">
-              Military-grade AES-256 encryption for all data at rest. TLS 1.3 for all data in transit between systems.
+              The production site is served over HTTPS. Additional controls will be documented as the platform and infrastructure mature.
             </p>
           </div>
 
-          <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8">
-            <FileCheck className="h-12 w-12 text-purple-500 mb-4" />
-            <h3 className="text-lg font-bold mb-3">Audit Trails</h3>
+          <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-7">
+            <FileCheck2 className="h-10 w-10 text-purple-500 mb-4" />
+            <h3 className="text-lg font-bold mb-3">Human review remains central</h3>
             <p className="text-zinc-400">
-              Complete immutable logs of every analysis, verification, and data access. Full regulatory compliance for audits.
+              Findings are decision-support signals. They do not replace legal, compliance, credit or underwriting judgment.
             </p>
           </div>
         </div>
 
-        {/* Compliance Info */}
-        <div className="bg-gradient-to-r from-gray-900/50 to-blue-900/20 border border-gray-800 rounded-xl p-8">
-          <h3 className="text-xl font-bold mb-4">Regulatory Compliance</h3>
-          <p className="text-zinc-400 mb-6">
-            Trade Securix is currently in formation. We are building our compliance framework in accordance with FinCEN KYC/AML regulations 
-            and relevant trade finance compliance standards. Our legal and compliance team ensures adherence to all applicable laws and regulations.
+        <div className="mt-8 rounded-2xl border border-gray-800 bg-gray-900/40 p-7">
+          <h3 className="text-lg font-bold mb-3">Compliance roadmap</h3>
+          <p className="text-zinc-400 leading-relaxed">
+            Formal certifications, regulatory claims and third-party compliance attestations will only be published after they are completed and independently verifiable.
           </p>
-          <ul className="space-y-2 text-sm text-zinc-400">
-            <li>✓ GDPR-compliant data processing</li>
-            <li>✓ CCPA-compliant privacy practices</li>
-            <li>✓ Industry best practices for trade finance</li>
-            <li>✓ Ongoing regulatory monitoring and updates</li>
-          </ul>
         </div>
       </div>
     </section>
