@@ -1,62 +1,45 @@
-import { FileText, Globe, BarChart3, AlertCircle, Lock, Zap } from "lucide-react";
+import { FileText, Building2, Scale } from "lucide-react";
 
 const features = [
   {
     icon: FileText,
-    title: "Document Analysis",
-    description: "Machine learning identifies document anomalies that manual review misses. Analyze PDFs, emails, and images for structural inconsistencies, font mismatches, and metadata red flags.",
+    title: "Document Intelligence",
+    description: "Review invoices, packing lists, contracts and supporting trade documents for missing fields, inconsistencies and signals that deserve human attention.",
   },
   {
-    icon: Globe,
-    title: "Global Counterparty Verification",
-    description: "Cross-reference company entities across 195+ jurisdictions. Verify registration status in real-time. Flag UBOs and beneficial ownership changes.",
+    icon: Building2,
+    title: "Counterparty Workspace",
+    description: "Keep importer and exporter information together with the transaction record so teams can compare submitted company details and supporting evidence in context.",
   },
   {
-    icon: BarChart3,
-    title: "Risk Scoring & Reporting",
-    description: "Proprietary risk model combines document analysis, registry verification, and transaction patterns. Get audit-ready reports with full methodology transparency.",
-  },
-  {
-    icon: AlertCircle,
-    title: "Real-Time Alerts",
-    description: "Set verification thresholds. Receive alerts when counterparties change status, new filings emerge, or sanctions flags appear.",
-  },
-  {
-    icon: Lock,
-    title: "Institutional-Grade Audit Trail",
-    description: "Every analysis action is logged. Full compliance with SOC 2 requirements. Export reports for auditors and regulators.",
-  },
-  {
-    icon: Zap,
-    title: "API Integration",
-    description: "Seamlessly integrate verification into your existing workflow. RESTful API with comprehensive documentation. Sandbox environment for testing.",
+    icon: Scale,
+    title: "Transaction Risk Review",
+    description: "Combine document findings and counterparty information into a structured review workflow with clear findings, severity and recommended follow-up checks.",
   },
 ];
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 px-6 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Built for Serious Traders
+    <section id="features" className="py-16 px-6 border-t border-gray-800">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            One workspace for the trade review
           </h2>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Institutional-grade tools designed to eliminate friction, reduce risk, and accelerate due diligence.
+          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+            Focused tools for reviewing the parties, documents and inconsistencies around an international transaction.
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, idx) => {
+        <div className="grid md:grid-cols-3 gap-6">
+          {features.map((feature) => {
             const Icon = feature.icon;
             return (
-              <div 
-                key={idx}
-                className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-gray-700 transition group"
+              <div
+                key={feature.title}
+                className="bg-gray-900/50 border border-gray-800 rounded-2xl p-7 hover:border-gray-700 transition"
               >
-                <Icon className="h-12 w-12 text-blue-600 mb-4 group-hover:scale-110 transition" />
+                <Icon className="h-10 w-10 text-blue-500 mb-5" />
                 <h3 className="text-lg font-bold mb-3">{feature.title}</h3>
                 <p className="text-zinc-400 leading-relaxed">{feature.description}</p>
               </div>
