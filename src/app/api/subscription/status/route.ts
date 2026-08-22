@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
+import { getCurrentUserSubscription } from "@/lib/subscription";
 
 export async function GET() {
-  return NextResponse.json({
-    configured: false,
-    message: "Subscription status is not configured yet.",
-  });
+  const subscription = await getCurrentUserSubscription();
+  return NextResponse.json(subscription);
 }
