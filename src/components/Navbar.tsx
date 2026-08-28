@@ -12,7 +12,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-40 border-b border-slate-800 bg-[#050b18] px-4 py-3 shadow-sm sm:px-6">
+      <nav aria-label="Primary navigation" className="sticky top-0 z-40 border-b border-slate-800 bg-[#050b18] px-4 py-3 shadow-sm sm:px-6">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
           <Link href="/" className="flex min-w-0 items-center gap-2.5" aria-label="TradeSecurix home">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-700 bg-slate-900 text-cyan-300 shadow-sm">
