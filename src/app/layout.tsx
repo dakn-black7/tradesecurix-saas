@@ -4,8 +4,8 @@ import Navbar from "@/components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
-  title: "TradeSecurix | Secure Trade Document Verification",
-  description: "Detect fraud risks in trade documents and verify global partners before sending money.",
+  title: "TradeSecurix | Trade Risk & Document Intelligence",
+  description: "Review counterparties and trade documents, surface inconsistencies, and assess transaction risk before money or goods move.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
