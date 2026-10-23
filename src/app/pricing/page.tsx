@@ -8,7 +8,7 @@ export default function PricingPage() {
         <div className="mx-auto max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-600">TradeSecurix Plans</p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl">Simple, transparent pricing</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400">Choose the level that fits your trade activity. All self-serve plans start with a 7-day free trial.</p>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400">Explore our proposed launch plans. Trials and subscriptions will be enabled after real verification services are tested and available.</p>
         </div>
       </section>
 
