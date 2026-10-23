@@ -4,7 +4,7 @@ export const siteConfig = {
   legalEmail: 'legal@tradesecurix.com',
   privacyEmail: 'privacy@tradesecurix.com',
   securityEmail: 'security@tradesecurix.com',
-  address: 'Randall Ave Ste 100, Cheyenne, WY 82001, United States',
+  address: '', // Add verified legal entity address only after merchant details are confirmed.
   linkedinUrl: 'https://linkedin.com',
   xUrl: 'https://twitter.com',
   bookDemoHref: '/contact',
