@@ -8,10 +8,13 @@ import CompanyCard from "@/components/CompanyCard";
 export default function VerificationClient() {
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationResult, setVerificationResult] = useState<any>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [query, setQuery] = useState({ companyName: "", country: "", registrationNumber: "" });
 
   const handleVerify = async () => {
     setIsVerifying(true);
+    setErrorMessage(null);
+    setVerificationResult(null);
     try {
       const response = await fetch("/api/verify", {
         method: "POST",
@@ -20,9 +23,11 @@ export default function VerificationClient() {
         body: JSON.stringify(query),
       });
       const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Verification unavailable");
+      if (!data.verificationStatus || !data.companyName) throw new Error("Invalid verification response");
       setVerificationResult(data);
     } catch (error) {
-      console.error("Verification failed:", error);
+      setErrorMessage(error instanceof Error ? error.message : "Verification unavailable");
     } finally {
       setIsVerifying(false);
     }
@@ -34,7 +39,7 @@ export default function VerificationClient() {
       <main className="flex-1 p-8">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold mb-2">Verify Company</h1>
-          <p className="text-zinc-400 mb-8">Search our global database to verify company details</p>
+          <p className="text-zinc-400 mb-8">Company registry verification is not yet available. No global database results are claimed.</p>
 
           <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 mb-8">
             <div className="space-y-6">
@@ -82,6 +87,7 @@ export default function VerificationClient() {
             </div>
           </div>
 
+          {errorMessage && <p role="alert" className="rounded-xl border border-amber-600 p-4 text-amber-200">{errorMessage}</p>}
           {verificationResult && <CompanyCard result={verificationResult} />}
         </div>
       </main>
