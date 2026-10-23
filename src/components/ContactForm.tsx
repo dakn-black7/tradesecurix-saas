@@ -164,8 +164,8 @@ export default function ContactForm() {
               {/* Privacy Notice */}
               <p className="text-xs text-zinc-500 text-center">
                 We handle inquiries according to our{" "}
-                <a href="/privacy" className="text-blue-400 hover:text-blue-300">
-                  privacy policy
+                <a href="mailto:contact@tradesecurix.com?subject=Privacy%20inquiry" className="text-blue-400 hover:text-blue-300">
+                  privacy contact
                 </a>
                 .
               </p>
