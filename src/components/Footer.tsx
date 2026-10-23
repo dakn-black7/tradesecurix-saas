@@ -15,7 +15,7 @@ export default function Footer() {
           </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:mt-0 lg:shrink-0">
             <Link
-              href="#contact"
+              href="/#contact"
               className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-300 bg-white px-5 text-sm font-bold text-slate-900 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
             >
               Request Demo
@@ -24,7 +24,7 @@ export default function Footer() {
               href="/auth/signup"
               className="inline-flex min-h-12 items-center justify-center rounded-xl bg-blue-600 px-5 text-sm font-bold text-white shadow-sm transition hover:bg-blue-500"
             >
-              Start 7-Day Free Trial
+              Create Account (Preview)
             </Link>
           </div>
         </div>
@@ -45,10 +45,10 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-bold">Product</h3>
             <div className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
-              <Link href="#features" className="block hover:text-slate-950 dark:hover:text-white">Product</Link>
-              <Link href="#how-it-works" className="block hover:text-slate-950 dark:hover:text-white">How It Works</Link>
+              <Link href="/#features" className="block hover:text-slate-950 dark:hover:text-white">Product</Link>
+              <Link href="/#how-it-works" className="block hover:text-slate-950 dark:hover:text-white">How It Works</Link>
               <Link href="/pricing" className="block hover:text-slate-950 dark:hover:text-white">Pricing</Link>
-              <Link href="#security" className="block hover:text-slate-950 dark:hover:text-white">Security</Link>
+              <Link href="/#security" className="block hover:text-slate-950 dark:hover:text-white">Security</Link>
             </div>
           </div>
 
@@ -66,7 +66,9 @@ export default function Footer() {
             <h3 className="text-sm font-bold">Contact</h3>
             <div className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-400">
               <a href="mailto:contact@tradesecurix.com" className="block hover:text-slate-950 dark:hover:text-white">contact@tradesecurix.com</a>
-              <Link href="#contact" className="block hover:text-slate-950 dark:hover:text-white">Request Demo</Link>
+              <Link href="/#contact" className="block hover:text-slate-950 dark:hover:text-white">Contact</Link>
+              <Link href="/terms" className="block hover:text-slate-950 dark:hover:text-white">Terms (Draft)</Link>
+              <Link href="/privacy" className="block hover:text-slate-950 dark:hover:text-white">Privacy (Draft)</Link>
             </div>
           </div>
         </div>
