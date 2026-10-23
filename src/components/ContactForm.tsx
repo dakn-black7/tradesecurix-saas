@@ -58,7 +58,7 @@ export default function ContactForm() {
             Request a Demo
           </h2>
           <p className="text-xl text-zinc-400">
-            See TradeSecurix in action. Our team will contact you within 24 hours.
+            See TradeSecurix in action. Please contact us directly while the online request service is being configured.
           </p>
         </div>
 
@@ -163,8 +163,8 @@ export default function ContactForm() {
 
               {/* Privacy Notice */}
               <p className="text-xs text-zinc-500 text-center">
-                We'll never share your information. Check our{" "}
-                <a href="#" className="text-blue-400 hover:text-blue-300">
+                We handle inquiries according to our{" "}
+                <a href="/privacy" className="text-blue-400 hover:text-blue-300">
                   privacy policy
                 </a>
                 .
