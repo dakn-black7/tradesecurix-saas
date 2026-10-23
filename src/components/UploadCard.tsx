@@ -23,7 +23,7 @@ export default function UploadCard({ isLoading = false, onFileSelect }: UploadCa
 
     const files = e.dataTransfer.files;
     if (files && files.length > 0) {
-      onFileSelect(files[0]);
+      if (files[0].size <= 10 * 1024 * 1024) onFileSelect(files[0]);
     }
   };
 
@@ -55,7 +55,7 @@ export default function UploadCard({ isLoading = false, onFileSelect }: UploadCa
           <Upload className="h-12 w-12 text-blue-600" />
           <div>
             <p className="text-lg font-semibold mb-1">Upload your document</p>
-            <p className="text-zinc-400">Drag and drop or click to select</p>
+            <p className="text-zinc-400">Drag and drop or select a file</p>
           </div>
           <input
             type="file"
@@ -65,7 +65,7 @@ export default function UploadCard({ isLoading = false, onFileSelect }: UploadCa
             accept=".pdf,.doc,.docx,.xls,.xlsx"
             id="file-upload"
           />
-          <label htmlFor="file-upload">
+          <div>
             <button
               disabled={isLoading}
               className="px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-xl font-semibold disabled:opacity-50"
@@ -73,8 +73,8 @@ export default function UploadCard({ isLoading = false, onFileSelect }: UploadCa
             >
               Select File
             </button>
-          </label>
-          <p className="text-xs text-zinc-500">PDF, DOC, DOCX, XLS, XLSX up to 10MB</p>
+          </div>
+          <p className="text-xs text-zinc-500">PDF, DOC, DOCX, XLS, XLSX up to 10 MB. Analysis is not yet enabled.</p>
         </div>
       )}
     </div>
